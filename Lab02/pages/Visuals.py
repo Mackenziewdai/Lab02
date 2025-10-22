@@ -10,7 +10,7 @@ def load_csv_data():
     except:
         return pd.DataFrame()
 
-# 初始化 Session State
+
 def init_session_state():
     if 'chart_data' not in st.session_state:
         st.session_state.chart_data = {
@@ -30,7 +30,7 @@ def init_session_state():
 def create_subject_scores_chart():
     st.header("1. Course Performance Comparison")
     
-    # 使用 Session State 中的数据
+   
     df = pd.DataFrame({
         'subject': list(st.session_state.chart_data.keys()),
         'score': list(st.session_state.chart_data.values())
@@ -39,7 +39,7 @@ def create_subject_scores_chart():
     st.bar_chart(df.set_index('subject')['score'])
     st.write("Bar chart showing performance scores across different subjects.")
     
-    # Session State 交互：允许用户重置数据
+   
     col1, col2 = st.columns(2)
     with col1:
         if st.button("Reset Scores", key="reset_scores"):
@@ -59,10 +59,9 @@ def create_subject_scores_chart():
 def create_study_trends_chart(csv_data):
     st.header("2. Study Hours Trends")
     
-    # 使用 Session State 存储科目选择
     subjects = ['All'] + (sorted(csv_data['subject'].unique().tolist()) if not csv_data.empty else [])
     
-    # 科目选择器 - 值存储在 Session State 中
+    
     selected_subject = st.selectbox(
         "Select Subject", 
         subjects, 
@@ -70,7 +69,7 @@ def create_study_trends_chart(csv_data):
         index=subjects.index(st.session_state.selected_subject) if st.session_state.selected_subject in subjects else 0
     )
     
-    # 更新 Session State
+   
     if selected_subject != st.session_state.selected_subject:
         st.session_state.selected_subject = selected_subject
         st.session_state.chart_updates += 1
@@ -94,8 +93,7 @@ def create_study_trends_chart(csv_data):
 
 def create_focus_understanding_chart(csv_data):
     st.header("3. Focus vs Understanding Analysis")
-    
-    # 使用 Session State 存储滑块值
+
     hour_range = st.slider(
         "Study Hours Range", 
         0.5, 8.0, 
@@ -104,7 +102,7 @@ def create_focus_understanding_chart(csv_data):
         key="hour_slider"
     )
     
-    # 更新 Session State 当滑块值改变时
+  
     if hour_range != st.session_state.hour_range:
         st.session_state.hour_range = hour_range
         st.session_state.chart_updates += 1
@@ -130,19 +128,18 @@ def create_focus_understanding_chart(csv_data):
     
     st.write(f"Scatter plot for study hours between {hour_range[0]} and {hour_range[1]} hours.")
     
-    # 显示 Session State 信息
+  
     with st.expander("Session State Info"):
         st.write(f"Current subject: {st.session_state.selected_subject}")
         st.write(f"Current hour range: {st.session_state.hour_range}")
         st.write(f"Total chart updates: {st.session_state.chart_updates}")
 
 def main():
-    # 初始化 Session State
+ 
     init_session_state()
     
     csv_data = load_csv_data()
-    
-    # 显示 Session State 计数器
+
     st.sidebar.metric("Session Updates", st.session_state.chart_updates)
     
     create_subject_scores_chart()
