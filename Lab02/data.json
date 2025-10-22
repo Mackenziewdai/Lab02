@@ -1,17 +1,51 @@
 {
-    "chart_title": "Sample Chart Data",
+    "chart_title": "Course Performance Overview",
     "data_points": [
         {
-            "label": "Item A",
-            "value": 15
+            "label": "Computer Science",
+            "value": 88
         },
         {
-            "label": "Item B",
-            "value": 30
+            "label": "Mathematics", 
+            "value": 85
         },
         {
-            "label": "Item C",
-            "value": 22
+            "label": "Physics",
+            "value": 78
+        },
+        {
+            "label": "English",
+            "value": 92
+        },
+        {
+            "label": "Chemistry",
+            "value": 82
+        }
+    ],
+    "study_analytics": {
+        "weekly_study_hours": 18,
+        "preferred_study_time": "Evening", 
+        "average_focus_score": 7.2,
+        "most_productive_subject": "Computer Science"
+    },
+    "learning_goals": [
+        {
+            "goal_name": "Master Python Programming",
+            "progress": 75,
+            "deadline": "2024-12-15",
+            "priority": "High"
+        },
+        {
+            "goal_name": "Improve Math Problem Solving",
+            "progress": 60, 
+            "deadline": "2024-11-30",
+            "priority": "Medium"
+        },
+        {
+            "goal_name": "Enhance English Writing Skills",
+            "progress": 85,
+            "deadline": "2025-01-20", 
+            "priority": "Medium"
         }
     ]
 }
